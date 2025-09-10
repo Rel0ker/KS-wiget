@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Widget - Демо</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .ks-widget {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .demo-header {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-text {
+            color: #000000;
+            font-weight: 700;
+        }
+        
+        .demo-button {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .demo-button:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Демо заголовок -->
+    <div class="demo-header text-center py-12 mb-8">
+        <h1 class="text-5xl font-bold mb-4 gradient-text">🌟 KS Widget</h1>
+        <p class="text-xl text-black mb-6">Современный виджет расписания для изучения корейского языка</p>
+        <div class="mt-8 space-x-4">
+            <a href="#widget" class="demo-button inline-block text-black px-8 py-4 rounded-xl transition-all duration-200 transform hover:scale-105">
+                <span class="mr-2">👀</span>
+                Посмотреть виджет
+            </a>
+            <a href="#integration" class="demo-button inline-block text-black px-8 py-4 rounded-xl transition-all duration-200 transform hover:scale-105">
+                <span class="mr-2">📖</span>
+                Инструкция по интеграции
+            </a>
+        </div>
+    </div>
+
+    <!-- Виджет -->
+    <div id="widget" class="container mx-auto px-4 mb-16">
+        <div class="ks-widget">
+            <!-- Виджет будет автоматически инициализирован здесь -->
+        </div>
+    </div>
+
+    <!-- Инструкция по интеграции -->
+    <div id="integration" class="container mx-auto px-4 mb-16">
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Как интегрировать виджет на ваш сайт</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Простая интеграция -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Простая интеграция</h3>
+                    <div class="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        <pre><code>&lt;!-- Подключение виджета --&gt;
+&lt;script src="https://your-domain.com/widget/widget.js"&gt;&lt;/script&gt;
+
+&lt;!-- Размещение виджета --&gt;
+&lt;div class="ks-widget"&gt;&lt;/div&gt;</code></pre>
+                    </div>
+                    <p class="text-black">Просто добавьте эти строки в HTML вашего сайта.</p>
+                </div>
+
+                <!-- Расширенная интеграция -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900">Расширенная интеграция</h3>
+                    <div class="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        <pre><code>&lt;!-- Подключение Vue.js --&gt;
+&lt;script src="https://unpkg.com/vue@3/dist/vue.global.js"&gt;&lt;/script&gt;
+
+&lt;!-- Подключение Tailwind CSS --&gt;
+&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+
+&lt;!-- Подключение виджета --&gt;
+&lt;script src="https://your-domain.com/widget/widget.js"&gt;&lt;/script&gt;
+
+&lt;!-- Размещение виджета --&gt;
+&lt;div class="ks-widget"&gt;&lt;/div&gt;</code></pre>
+                    </div>
+                    <p class="text-black">Для полной функциональности подключите Vue.js и Tailwind CSS.</p>
+                </div>
+            </div>
+
+            <!-- Настройки API -->
+            <div class="mt-8 p-6 bg-blue-50 rounded-xl border border-blue-200">
+                <h3 class="text-lg font-semibold text-blue-900 mb-3">Настройка API</h3>
+                <p class="text-blue-800 mb-3">По умолчанию виджет использует API по адресу <code>http://localhost:8000/api</code>.</p>
+                <p class="text-blue-800">Для продакшена измените <code>API_BASE</code> в файле <code>widget.js</code> на ваш домен.</p>
+            </div>
+
+            <!-- Возможности -->
+            <div class="mt-12">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center gradient-text">✨ Возможности виджета</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="feature-card p-6 rounded-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                            <span class="text-2xl">🔍</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-3 text-center text-lg">Фильтрация и поиск</h4>
+                        <p class="text-black text-center">Умная фильтрация по уровню, сортировка, показ только доступных групп с красивыми анимациями</p>
+                    </div>
+                    
+                    <div class="feature-card p-6 rounded-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-3 text-center text-lg">Детальная информация</h4>
+                        <p class="text-black text-center">Полное описание курса, расписание, дата начала с прогресс-барами и индикаторами</p>
+                    </div>
+                    
+                    <div class="feature-card p-6 rounded-2xl">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                            <span class="text-2xl">📝</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-3 text-center text-lg">Форма заявки</h4>
+                        <p class="text-black text-center">Современная форма для записи в группу с валидацией и красивыми уведомлениями</p>
+                    </div>
+                </div>
+                
+                <!-- Дополнительные возможности -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="feature-card p-6 rounded-2xl">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-pink-600 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">📱</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 text-lg">Адаптивный дизайн</h4>
+                        </div>
+                        <p class="text-black">Полностью адаптивный дизайн, который отлично выглядит на всех устройствах</p>
+                    </div>
+                    
+                    <div class="feature-card p-6 rounded-2xl">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">⚡</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 text-lg">Быстрая загрузка</h4>
+                        </div>
+                        <p class="text-black">Оптимизированный код для быстрой загрузки и плавных анимаций</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <div class="text-center text-black py-12">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-lg">
+                <h3 class="text-2xl font-bold mb-4 gradient-text">🚀 Готовы начать?</h3>
+                <p class="text-lg mb-6 text-black">Интегрируйте KS Widget на ваш сайт уже сегодня!</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#integration" class="demo-button inline-block text-black px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105">
+                        <span class="mr-2">📖</span>
+                        Документация
+                    </a>
+                    <a href="https://github.com" class="demo-button inline-block text-black px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105">
+                        <span class="mr-2">💻</span>
+                        GitHub
+                    </a>
+                    <a href="mailto:contact@example.com" class="demo-button inline-block text-black px-6 py-3 rounded-xl transition-all duration-200 transform hover:scale-105">
+                        <span class="mr-2">📧</span>
+                        Поддержка
+                    </a>
+                </div>
+            </div>
+            <p class="mt-8 text-sm text-gray-500">&copy; 2025 KS Widget. Современный виджет для изучения корейского языка.</p>
+        </div>
+    </div>
+
+    <script src="widget.js"></script>
+</body>
+</html>

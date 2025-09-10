@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS Widget Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .debug {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 KS Widget Test</h1>
+        
+        <div class="test-info">
+            <h3>Информация о тесте:</h3>
+            <p><strong>Текущий домен:</strong> <span id="current-domain"></span></p>
+            <p><strong>API URL:</strong> <span id="api-url"></span></p>
+            <p><strong>Время теста:</strong> <span id="test-time"></span></p>
+        </div>
+
+        <div id="test-results"></div>
+
+        <div class="debug" id="debug-info">
+            <h4>Отладочная информация:</h4>
+            <pre id="debug-content"></pre>
+        </div>
+
+        <h3>Виджет:</h3>
+        <div id="ks-widget-container"></div>
+    </div>
+
+    <script>
+        // Отладочная информация
+        const debugInfo = {
+            hostname: window.location.hostname,
+            protocol: window.location.protocol,
+            port: window.location.port,
+            userAgent: navigator.userAgent,
+            timestamp: new Date().toISOString()
+        };
+
+        // Определяем API URL
+        const API_BASE = (() => {
+            const hostname = window.location.hostname;
+            
+            if (hostname === 'ks.dev-re.ru' || hostname === 'www.ks.dev-re.ru' || 
+                hostname === 'ksdev-re.ru' || hostname === 'www.ksdev-re.ru') {
+                return 'https://back.ks.dev-re.ru/api';
+            } else if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                return 'http://localhost:8000/api';
+            } else {
+                return 'https://back.ks.dev-re.ru/api';
+            }
+        })();
+
+        // Заполняем информацию
+        document.getElementById('current-domain').textContent = window.location.hostname;
+        document.getElementById('api-url').textContent = API_BASE;
+        document.getElementById('test-time').textContent = new Date().toLocaleString('ru-RU');
+        document.getElementById('debug-content').textContent = JSON.stringify(debugInfo, null, 2);
+
+        // Тестируем API
+        async function testAPI() {
+            const resultsDiv = document.getElementById('test-results');
+            
+            try {
+                resultsDiv.innerHTML = '<div class="debug">🔄 Тестируем API...</div>';
+                
+                const response = await fetch(`${API_BASE}/groups/public/`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <div class="success">
+                        ✅ API работает корректно!<br>
+                        Получено групп: ${data.length}<br>
+                        Статус: ${response.status}
+                    </div>
+                `;
+                
+                console.log('API Test Success:', data);
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Ошибка API: ${error.message}<br>
+                        URL: ${API_BASE}/groups/public/
+                    </div>
+                `;
+                
+                console.error('API Test Error:', error);
+            }
+        }
+
+        // Запускаем тест
+        testAPI();
+
+        // Загружаем виджет
+        setTimeout(() => {
+            const script = document.createElement('script');
+            script.src = 'widget.js';
+            script.onerror = () => {
+                document.getElementById('ks-widget-container').innerHTML = 
+                    '<div class="error">❌ Не удалось загрузить widget.js</div>';
+            };
+            document.head.appendChild(script);
+        }, 1000);
+    </script>
+</body>
+</html>
